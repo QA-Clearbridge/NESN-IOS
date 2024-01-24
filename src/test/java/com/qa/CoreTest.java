@@ -1,6 +1,7 @@
 package com.qa;
 
 import com.aventstack.extentreports.testng.listener.ExtentITestListenerAdapter;
+import com.qa.pages.watchList;
 import com.qa.utils.TestUtils;
 import io.appium.java_client.AppiumDriver;
 import io.appium.java_client.InteractsWithApps;
@@ -10,6 +11,7 @@ import io.appium.java_client.service.local.AppiumServiceBuilder;
 import io.appium.java_client.service.local.flags.GeneralServerFlag;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -21,6 +23,7 @@ import java.io.InputStream;
 import java.net.ServerSocket;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 @Listeners(ExtentITestListenerAdapter.class)
@@ -183,4 +186,11 @@ public class CoreTest {
     public void afterTest() {
         driver.quit();
     }
+
+    public static void swipe(AppiumDriver driver){
+        Map<String, Object> params = new HashMap<>();
+        params.put("direction", "down");
+        driver.executeScript("mobile: swipe", params);
+    }
+
 }

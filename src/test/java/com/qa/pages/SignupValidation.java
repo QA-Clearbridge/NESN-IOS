@@ -11,7 +11,7 @@ import java.time.Duration;
 import static org.openqa.selenium.By.id;
 
 
-public class Signup extends CoreTest {
+public class SignupValidation extends CoreTest {
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"Create Account\"]")
     private WebElement createAccount;
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeApplication[@name=\"NESN 360\"]/XCUIElementTypeWindow/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeOther/XCUIElementTypeScrollView/XCUIElementTypeOther[1]/XCUIElementTypeOther/XCUIElementTypeOther[1]/XCUIElementTypeTextField")
@@ -23,30 +23,33 @@ public class Signup extends CoreTest {
     @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"Let’s Go!\"]")
     private WebElement letsGo;
 
+    @iOSXCUITFindBy(xpath = "//XCUIElementTypeButton[@name=\"Sign In\"]")
+    private WebElement signIn;
 
-    public Signup passwordText(String psw) {
-        sendKeys(passwordText,psw);
+    public SignupValidation signIn() {
+        signIn.click();
         return this;
     }
 
-    public Signup firstName(String fName) {
-        sendKeys(firstName,fName);
-        return this;
+    public boolean passwordText(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        return wait.until(ExpectedConditions.visibilityOf(passwordText)).isDisplayed();
     }
 
-    public Signup emailTextField(String emailNew) {
-        sendKeys(emailTxtField,emailNew);
-        return this;
+    public boolean firstName(){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        return wait.until(ExpectedConditions.visibilityOf(firstName)).isDisplayed();
     }
 
-    public Signup createAccount() {
-        createAccount.click();
-        return this;
+
+    public boolean emailTxtField() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        return wait.until(ExpectedConditions.visibilityOf(emailTxtField)).isDisplayed();
     }
 
-    public Signup letsGo() {
-        letsGo.click();
-        return this;
+    public boolean letsGo() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        return wait.until(ExpectedConditions.visibilityOf(letsGo)).isDisplayed();
     }
 
 }
