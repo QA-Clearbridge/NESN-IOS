@@ -10,12 +10,8 @@
         <parameter name="deviceName" value="iPhone" />
         <parameter name="deviceVersion" value="13" />
         <classes>
-            <class name="com.qa.tests.LoginTests">
-            <methods>
-                <include name="launch"/>
-            </methods>
+            <class name="com.qa.tests.watchScreen">
             </class>
-<!--            <class name="com.qa.tests.watchScreen"/>-->
         </classes>
     </test>
 </suite>

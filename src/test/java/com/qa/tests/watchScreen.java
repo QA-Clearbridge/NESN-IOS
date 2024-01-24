@@ -5,9 +5,10 @@ import com.qa.pages.*;
 import org.json.JSONObject;
 import org.json.JSONTokener;
 import org.testng.annotations.*;
-
+import io.appium.java_client.InteractsWithApps;
 import java.io.InputStream;
 import java.lang.reflect.Method;
+import java.util.Random;
 
 public class watchScreen extends CoreTest {
     com.qa.pages.loginPage loginPage;
@@ -17,6 +18,12 @@ public class watchScreen extends CoreTest {
     com.qa.pages.accountPage accountPage;
     com.qa.pages.verifyLogin verifyLogin;
     com.qa.pages.vodSearch vodSearch;
+    com.qa.pages.watchList watchList;
+    com.qa.pages.Signup SignUp;
+    com.qa.pages.SignupValidation SignupValidation;
+    com.qa.pages.faqValidation faqValidation;
+    com.qa.pages.toolBar toolBar;
+    com.qa.pages.bets bets;
 
 
     @BeforeClass
@@ -51,6 +58,12 @@ public class watchScreen extends CoreTest {
         accountPage = new accountPage();
         verifyLogin = new verifyLogin();
         vodSearch = new vodSearch();
+        watchList = new watchList();
+        faqValidation = new faqValidation();
+        SignUp = new Signup();
+        SignupValidation = new SignupValidation();
+        toolBar = new toolBar();
+        bets = new bets();
     }
 
     @AfterMethod
@@ -59,8 +72,10 @@ public class watchScreen extends CoreTest {
         accountPage.AccountIcon();
         accountPage.manageAcc();
         loginPage.signOut();
-
     }
+    Random rand = new Random();
+    // Generate random integers in range 0 to 999
+    int rand_int1 = rand.nextInt(1000);
 
     @Test
     public void login() {
@@ -75,6 +90,51 @@ public class watchScreen extends CoreTest {
         loginPage.emailTxtField(loginUser.getJSONObject("validUser").getString("username"));
         loginPage.passwordText(loginUser.getJSONObject("validUser").getString("password"));
         loginPage.loginBtn();
+    }
+    @Test
+    public void signUp() {
+        SignUp.createAccount();
+        SignUp.firstName(loginUser.getJSONObject("firstName").getString("firstName"));
+        SignUp.emailTextField("djay"+rand_int1+"@amdocs.com");
+        SignUp.passwordText(loginUser.getJSONObject("validUser").getString("password"));
+        SignUp.letsGo();
+    }
+    @Test
+    public void signUpValidation() {
+        SignUp.createAccount();
+        SignupValidation.firstName();
+        SignupValidation.letsGo();
+        SignupValidation.emailTxtField();
+        SignupValidation.passwordText();
+        SignupValidation.signIn();
+        loginPage.emailTxtField(loginUser.getJSONObject("validUser").getString("username"));
+        loginPage.passwordText(loginUser.getJSONObject("validUser").getString("password"));
+        loginPage.loginBtn();
+    }
+
+    @Test
+    public void toolBar() {
+        loginPage.emailTxtField(loginUser.getJSONObject("validUser").getString("username"));
+        loginPage.passwordText(loginUser.getJSONObject("validUser").getString("password"));
+        loginPage.loginBtn();
+//        toolBar.bets();
+//        toolBar.news();
+//        toolBar.schedule();
+//        toolBar.score();
+    }
+
+    @Test
+    public void bets() {
+        loginPage.emailTxtField(loginUser.getJSONObject("validUser").getString("username"));
+        loginPage.passwordText(loginUser.getJSONObject("validUser").getString("password"));
+        loginPage.loginBtn();
+//        bets.betsOn();
+//        bets.betSelect();
+//        bets.accIconClick();
+//        bets.NESNBets();
+//        bets.betSelectAcc();
+//        bets.betBack();
+//        bets.done();
     }
 
     @Test
@@ -107,7 +167,31 @@ public class watchScreen extends CoreTest {
         loginPage.emailTxtField(loginUser.getJSONObject("validUser").getString("username"));
         loginPage.passwordText(loginUser.getJSONObject("validUser").getString("password"));
         loginPage.loginBtn();
+        vodSearch.searchButton();
         vodSearch.search(loginUser.getJSONObject("search").getString("search"));
         vodSearch.backButton();
+    }
+    @Test
+    public void watchList() {
+        loginPage.emailTxtField(loginUser.getJSONObject("validUser").getString("username"));
+        loginPage.passwordText(loginUser.getJSONObject("validUser").getString("password"));
+        loginPage.loginBtn();
+    }
+
+    @Test
+    public void reLaunch() {
+        loginPage.emailTxtField(loginUser.getJSONObject("validUser").getString("username"));
+        loginPage.passwordText(loginUser.getJSONObject("validUser").getString("password"));
+        loginPage.loginBtn();
+        /*closeApp();
+        launchApp();*/
+    }
+
+    @Test
+    public void faqVerify() {
+        faqValidation.isFAQLinkDisplayed();
+        loginPage.emailTxtField(loginUser.getJSONObject("validUser").getString("username"));
+        loginPage.passwordText(loginUser.getJSONObject("validUser").getString("password"));
+        loginPage.loginBtn();
     }
 }
