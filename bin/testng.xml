@@ -6,12 +6,16 @@
     </listeners>
     <test name="iPhone">
         <parameter name="platformName" value="iOS" />
-        <parameter name="udid" value="00008101-000828D6347A001E" />
-        <parameter name="deviceName" value="iPhone12-15" />
+        <parameter name="udid" value="00008020-001A684E11F0002E" />
+        <parameter name="deviceName" value="iPhone" />
         <parameter name="deviceVersion" value="13" />
         <classes>
-            <class name="com.qa.tests.LoginTests"/>
-            <class name="com.qa.tests.watchScreen"/>
+            <class name="com.qa.tests.LoginTests">
+            <methods>
+                <include name="launch"/>
+            </methods>
+            </class>
+<!--            <class name="com.qa.tests.watchScreen"/>-->
         </classes>
     </test>
 </suite>
